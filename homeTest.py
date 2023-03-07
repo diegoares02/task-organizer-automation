@@ -1,10 +1,13 @@
 import pytest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver import FirefoxOptions
 
 @pytest.fixture(scope="class")
 def setup(request):
-    driver = webdriver.Firefox()
+    opts = FirefoxOptions()
+    opts.add_argument("--headless")
+    driver = webdriver.Firefox(options=opts)
     driver.maximize_window()
     request.cls.driver = driver
     yield
